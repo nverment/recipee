@@ -12,7 +12,8 @@ food_types = ["legumes", "chicken", "ladero", "ground meat", "carbs", "seafood",
 food_type = food_types[dnum]
 
 legumes = {
-    "beans and taters": {"black beans", "potatoes", "tomato sauce", "tomato paste", "harissa", "onion"}
+    "beans and taters": {"black beans", "potatoes", "tomato sauce", "tomato paste", "harissa", "onion"},
+    "bean burritos" : {"black beans", "potatoes", "tomato puree", "harissa", "onion", "cheese", "yoghurt"}
 }
 
 chicken = {
@@ -27,7 +28,8 @@ ladero = {
 ground_meat = {
     "chili": {"ground meat", "tomato paste", "tomato sauce", "harissa", "onions", "carrots", "potatoes"},
     "soy mince pasta": {"pasta", "soy ground meat", "tomato paste", "tomato sauce", "harissa", "onions", "cheese"},
-    "mince pasta": {"pasta", "ground meat", "tomato paste", "tomato sauce", "harissa", "onions", "cheese"}
+    "mince pasta": {"pasta", "ground meat", "tomato paste", "tomato sauce", "harissa", "onions", "cheese"},
+    "lahmajoun" : {"ground meat", "tomatoes", "onions", "wraps"}
 }
 
 carbs = {
