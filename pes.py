@@ -1,7 +1,6 @@
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 
-ingredients = ["Courgette", "Flour", "Pita", "Lentils", "Yogurt", "Cucumber", "Garlic", "Lemon", "Onion", "Tomato Sauce", "Rice", "Mustard", "Pasta", "Tomato Puree", "Parsley", "Oregano", "Octopus (Canned)", "Spaghetti", "Potatoes", "Chicken", "Beef", "Mince"]
 
 meat=["Chicken", "Beef", "Mince"]
 
@@ -35,8 +34,29 @@ class RecipeBook():
             if not rr.has_meat:
                 print(f"{rr.title}")
                 
+class RecApp():
+    rb=RecipeBook()
+
+    ingredients = ["Courgette", "Flour", "Pita", "Lentils", "Yogurt", "Cucumber", "Garlic", "Lemon", "Onion", "Tomato Sauce", "Rice", "Mustard", "Pasta", "Tomato Puree", "Parsley", "Oregano", "Octopus (Canned)", "Spaghetti", "Potatoes", "Chicken", "Beef", "Mince"]
+    
     def add_ingredient(self, ingredient :str):
         ingredients.append(ingredient.capitalize())
+        completer = WordCompleter(ingredients, ignore_case=True)
+
+    def create_recipe():
+        title='test title'
+        # title=input("Enter recipe title: ")
+        completer = WordCompleter(ingredients, ignore_case=True)
+        ing = map(str.capitalize, ['tomatoes', 'chicken'])
+
+        # ing =  list(prompt("Ingredients (comma-seperated): ", completer=completer).split(","))
+
+        for ingredient in ing:
+            if ingredient not in ingredients:
+                ingredients.append(str.capitalize(ingredient))
+
+        rb.add_recipe(Recipe(title, ing))
+
      
 def new_recipe():
     # title=input("Enter recipe title: ")
