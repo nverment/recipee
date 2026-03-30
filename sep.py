@@ -1,3 +1,6 @@
+import json
+from collections import defaultdict
+from pprint import pprint
 from prompt_toolkit import prompt
 from prompt_toolkit.completion import WordCompleter
 
@@ -16,12 +19,28 @@ class Recipe():
         self.title = title.capitalize()
         self.has_meat = False if set(ingredients).intersection(meat)==set() else True 
         self.ingredients = ingredients
+
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "ingredients": self.ingredients,
+            "has_meat": self.has_meat
+        }
  
 class RecipeBook():
     # TODO find better structure 
     recipes=[]
 
-    def add_recipe(self, recipe :Recipe):
+    def add_recipe(self, recipe=None):
+        if recipe==None:
+            title=input("Enter recipe title: ")
+            completer = WordCompleter(ingredients, ignore_case=True)
+            ing =  list(prompt("Ingredients (comma-seperated): ", completer=completer).split(","))
+
+            for ingredient in ing:
+                if ingredient not in ingredients:
+                    add_ingredient(str.capitalize(ingredient))
+            recipe=Recipe(title, ing)
         self.recipes.append(recipe)
 
     def show_all(self):
@@ -37,35 +56,28 @@ class RecipeBook():
                 
     def add_ingredient(self, ingredient :str):
         ingredients.append(ingredient.capitalize())
+
+    def search_by_ingredient(ingredient :str):
+        if not ingredient in by_ingredient:
+            print("not found")
+        res = by_ingredient[ingredient.lower()]
+        for r in res:
+            print(f"- {res.title}\n{[ing for ing in res.ingredients]}")
+
+
      
-def new_recipe():
-    # title=input("Enter recipe title: ")
-    rb = RecipeBook()
-    # TODO autocomplete from a list of ingredients
-    rec1 = Recipe("patates", ["Potatoes", "Flour"])
-    rec2 = Recipe("withmeat", ["Chicken", "Flour"])
-    rb.add_recipe(rec1)
-    rb.add_recipe(rec2)
-    title = 'test'
-    completer = WordCompleter(ingredients, ignore_case=True)
-    # ing =  list(prompt("Ingredients (comma-seperated): ", completer=completer).split(","))
-    ing = map(str.capitalize, ['tomatoes', 'chicken'])
+rb = RecipeBook()
+rec1 = Recipe("patates", ["Potatoes", "Flour"])
+rec2 = Recipe("withmeat", ["Chicken", "Flour"])
+rb.add_recipe(rec1)
+rb.add_recipe(rec2)
+rb.show_all()
 
-    for ingredient in ing:
-        if ingredient not in ingredients:
-            ingredients.append(str.capitalize(ingredient))
+by_ingredient = defaultdict(list) 
 
-    add_recipe(Recipe(title, ing))
+for recipe in rb.recipes:
+    for ingredient in recipe.ingredients:
+        by_ingredient[ingredient.lower()].append(recipe)
 
-    rb.show_all()
-
-new_recipe()
-    # rb = RecipeBook()
-    # # TODO autocomplete from a list of ingredients
-    # rb.add_recipe_inp()
-    # rec1 = Recipe("patates", ["Potatoes", "Flour"])
-    # rec2 = Recipe("withmeat", ["Chicken", "Flour"])
-    # rb.add_recipe(rec1)
-    # rb.add_recipe(rec2)
-    # rb.show_all()
-    # rb.show_meatless()
+with open('by_ingredient.json', "w") as fp:
+    json.dump(by_ingredient, fp)
