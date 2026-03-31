@@ -1,0 +1,40 @@
+{
+  "potatoes": [
+    {
+      "title": "Patates",
+      "ingredients": [
+        "Potatoes",
+        "Flour"
+      ],
+      "has_meat": false
+    }
+  ],
+  "flour": [
+    {
+      "title": "Patates",
+      "ingredients": [
+        "Potatoes",
+        "Flour"
+      ],
+      "has_meat": false
+    },
+    {
+      "title": "Withmeat",
+      "ingredients": [
+        "Chicken",
+        "Flour"
+      ],
+      "has_meat": true
+    }
+  ],
+  "chicken": [
+    {
+      "title": "Withmeat",
+      "ingredients": [
+        "Chicken",
+        "Flour"
+      ],
+      "has_meat": true
+    }
+  ]
+}

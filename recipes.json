@@ -1,0 +1,11 @@
+[
+  {
+    "title": "Potatos",
+    "ingredients": [
+      "Potatoes",
+      "Tomato"
+    ],
+    "has_meat": false,
+    "notes": "A single potato and a single tomato"
+  }
+]
